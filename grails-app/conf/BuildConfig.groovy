@@ -84,6 +84,8 @@ grails.project.dependency.resolution = {
         //compile ":coffee-asset-pipeline:1.5.0"
         //compile ":handlebars-asset-pipeline:1.3.0.1"
 
+        runtime ":navigation:1.3.2"
+
         compile ":spring-security-core:2.0-RC2", ":spring-security-ui:1.0-RC1"
         compile ':searchable:0.6.6'
     }

@@ -31,7 +31,7 @@ class BootStrap {
         def chuck = new User(
                 loginId: "chuck_norris",
                 passwordHash: springSecurityService.encodePassword("highkick"),
-                profile: new Profile(fullName: "Chuck Norris", email: "chuck@nowhere.net"),
+                profile: new Profile(fullName: "Chuck Norris", email: "chuck@nowhere.net", skin:"nighttime"),
                 dateCreated: now).save(failOnError: true)
         def glen = new User(
                 loginId: "glen",
@@ -46,7 +46,7 @@ class BootStrap {
         def frankie = new User(
                 loginId: "frankie",
                 passwordHash: springSecurityService.encodePassword("testing"),
-                profile: new Profile(fullName: "Frankie Goes to Hollywood", email: "frankie@nowhere.net"),
+                profile: new Profile(fullName: "Frankie Goes to Hollywood", email: "frankie@nowhere.net", skin:"nighttime"),
                 dateCreated: now).save(failOnError: true)
         def sara = new User(
                 loginId: "sara",

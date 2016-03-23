@@ -11,6 +11,12 @@ class UserController {
     static scaffold = true
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
 
+    static navigation = [
+            [group:'tabs', action:'search', order: 90],
+            [action: 'advSearch', title: 'Advanced Search', order: 95],
+            [action: 'register', order: 99, isVisible: { true }]
+    ]
+
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
         respond User.list(params), model:[userInstanceCount: User.count()]

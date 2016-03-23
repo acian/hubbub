@@ -8,6 +8,7 @@
 	<title>Hubbub &raquo; <g:layoutTitle default="Welcome" /></title>
 	<g:external dir="css" file="hubbub.css"/>
 	<g:external dir="css" file="main.css"/>
+	<nav:resources/>
 	<g:layoutHead />
 </head>
 <body>
@@ -19,6 +20,7 @@
 		</g:link>
 	</div>
 	<div id="bd"><!-- start body -->
+	<nav:render group="tabs"/>
 	<g:layoutBody/>
 	</div> <!-- end body -->
 	<div id="ft">

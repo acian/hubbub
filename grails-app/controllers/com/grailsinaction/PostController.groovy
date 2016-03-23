@@ -6,6 +6,11 @@ class PostController {
     def postService
     def springSecurityService
 
+    static navigation = [
+            [group:'tabs', action: 'personal', title: 'My Timeline', order: 0],
+            [action: 'global', title: 'Global Timeline', order: 1]
+    ]
+
     def timeline() {
         def user = User.findByLoginId(params.id)
         if (!user) {
@@ -46,6 +51,10 @@ class PostController {
         }
         redirect(action: 'timeline', id: id)
 
+    }
+
+    def global() {
+        [ posts : Post.list(params), postCount : Post.count() ]
     }
 
 }

@@ -5,6 +5,10 @@
                 user.loginId}
     </title>
     <meta name="layout" content="main"/>
+    <g:javascript library="jquery"/>
+    <g:if test="${user.profile?.skin}">
+        <g:external dir="css" file="${user.profile.skin}.css"/>
+    </g:if>
 </head>
 
 <body>
@@ -45,6 +49,9 @@
             </div>
         </div>
     </g:each>
+</div>
+<div id="allPosts">
+    <g:render template="postEntry" collection="${user.posts}" var="post"/>
 </div>
 </body>
 </html>
