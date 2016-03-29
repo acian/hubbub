@@ -151,7 +151,7 @@ grails.plugin.springsecurity.controllerAnnotations.staticRules = [
         '/**/favicon.ico': ['permitAll']
 ]
 
-//grails.plugin.databasemigration.updateOnStart = false
+//grails.plugin.databasemigration.updateOnStart = true
 //grails.plugin.databasemigration.updateOnStartFileNames = ['changelog.groovy']
 
 grails.plugin.springsecurity.userLookup.userDomainClassName = "com.grailsinaction.User"
@@ -179,3 +179,20 @@ grails.plugin.springsecurity.interceptUrlMap = [
         '/**'          : ['isAuthenticated()']
 
 ]
+
+grails.mail.host="doraceparo@gmail.com"
+grails.mail.default.from="hubbub@grailsinaction.com"
+
+grails {
+    mail {
+        host = "smtp.gmail.com"
+        port = 465
+        username = "doraceparo@gmail.com"
+        password = "laok1234"
+        props = ["mail.smtp.auth":"true",
+                 "mail.smtp.socketFactory.port":"465",
+                 "mail.smtp.socketFactory.class":
+                         "javax.net.ssl.SSLSocketFactory",
+                 "mail.smtp.socketFactory.fallback":"false"]
+    }
+}

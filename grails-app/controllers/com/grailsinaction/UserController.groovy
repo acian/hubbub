@@ -1,7 +1,6 @@
 package com.grailsinaction
 
 
-
 import static org.springframework.http.HttpStatus.*
 import grails.transaction.Transactional
 
@@ -10,16 +9,18 @@ class UserController {
 
     static scaffold = true
     static allowedMethods = [save: "POST", update: "PUT", delete: "DELETE"]
+    def mailService
+
 
     static navigation = [
-            [group:'tabs', action:'search', order: 90],
+            [group: 'tabs', action: 'search', order: 90],
             [action: 'advSearch', title: 'Advanced Search', order: 95],
             [action: 'register', order: 99, isVisible: { true }]
     ]
 
     def index(Integer max) {
         params.max = Math.min(max ?: 10, 100)
-        respond User.list(params), model:[userInstanceCount: User.count()]
+        respond User.list(params), model: [userInstanceCount: User.count()]
     }
 
     def show(User userInstance) {
@@ -38,11 +39,11 @@ class UserController {
         }
 
         if (userInstance.hasErrors()) {
-            respond userInstance.errors, view:'create'
+            respond userInstance.errors, view: 'create'
             return
         }
 
-        userInstance.save flush:true
+        userInstance.save flush: true
 
         request.withFormat {
             form multipartForm {
@@ -57,15 +58,15 @@ class UserController {
         respond userInstance
     }
 
-    def search(){}
+    def search() {}
 
     def results(String loginId) {
         def users = User.where {
             loginId =~ loginId
         }.list()
-        return [ users: users,
-                 term: params.loginId,
-                 totalUsers: User.count() ]
+        return [users     : users,
+                term      : params.loginId,
+                totalUsers: User.count()]
     }
 
     def advSearch() {}
@@ -85,7 +86,7 @@ class UserController {
             }
 
         }
-        [ profiles : profiles ]
+        [profiles: profiles]
 
     }
 
@@ -97,18 +98,18 @@ class UserController {
         }
 
         if (userInstance.hasErrors()) {
-            respond userInstance.errors, view:'edit'
+            respond userInstance.errors, view: 'edit'
             return
         }
 
-        userInstance.save flush:true
+        userInstance.save flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.updated.message', args: [message(code: 'User.label', default: 'User'), userInstance.id])
                 redirect userInstance
             }
-            '*'{ respond userInstance, [status: OK] }
+            '*' { respond userInstance, [status: OK] }
         }
     }
 
@@ -120,14 +121,14 @@ class UserController {
             return
         }
 
-        userInstance.delete flush:true
+        userInstance.delete flush: true
 
         request.withFormat {
             form multipartForm {
                 flash.message = message(code: 'default.deleted.message', args: [message(code: 'User.label', default: 'User'), userInstance.id])
-                redirect action:"index", method:"GET"
+                redirect action: "index", method: "GET"
             }
-            '*'{ render status: NO_CONTENT }
+            '*' { render status: NO_CONTENT }
         }
     }
 
@@ -137,9 +138,10 @@ class UserController {
                 flash.message = message(code: 'default.not.found.message', args: [message(code: 'userInstance.label', default: 'User'), params.id])
                 redirect action: "index", method: "GET"
             }
-            '*'{ render status: NOT_FOUND }
+            '*' { render status: NOT_FOUND }
         }
     }
+
     def register() {
         if (request.method == "POST") {
             def user = new User(params)
@@ -149,7 +151,7 @@ class UserController {
                 redirect(uri: '/')
             } else {
                 flash.message = "Error Registering User"
-                return [ user: user ]
+                return [user: user]
             }
         }
     }
@@ -162,6 +164,19 @@ class UserController {
             response.sendError(404)
         }
     }
+
+    def welcomeEmail(String email) {
+        if (email) {
+            mailService.sendMail {
+                to params.email
+                subject "Welcome to Hubbub!"
+                html view: "/user/welcomeEmail", model: [ email: email ]
+            }
+            flash.message = "Welcome aboard"
+        }
+        redirect(uri: "/")
+    }
+
 
     class UserRegistrationCommand {
         String loginId
@@ -181,4 +196,6 @@ class UserController {
                         return passwd != urc.loginId
                     })
 
-}}}
+        }
+    }
+}

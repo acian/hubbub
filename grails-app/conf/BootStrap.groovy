@@ -3,8 +3,8 @@ import static java.util.Calendar.*
 
 class BootStrap {
 
-    def searchableService
-    def springSecurityService
+   def searchableService
+   def springSecurityService
 
     def init = { servletContext ->
         environments {

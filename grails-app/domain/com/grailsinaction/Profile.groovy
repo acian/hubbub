@@ -11,6 +11,9 @@ class Profile {
     String country
     String jabberAddress
     String skin
+    String twitterId
+
+
 
     static constraints = {
         fullName blank: false
@@ -22,6 +25,7 @@ class Profile {
         timezone nullable: true
         jabberAddress email: true, nullable: true
         skin(nullable: true, blank: true, inList: ['blues', 'nighttime'])
+        twitterId(nullable: true)
 
     }
 

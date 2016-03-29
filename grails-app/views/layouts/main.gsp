@@ -5,11 +5,13 @@
 <!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"><!--<![endif]-->
 <head>
+
 	<title>Hubbub &raquo; <g:layoutTitle default="Welcome" /></title>
 	<g:external dir="css" file="hubbub.css"/>
 	<g:external dir="css" file="main.css"/>
 	<nav:resources/>
 	<g:layoutHead />
+	<r:layoutResources />
 </head>
 <body>
 <div>
@@ -27,5 +29,6 @@
 		<div id="footerText">Hubbub - Social Networking on Grails</div>
 	</div>
 </div>
+<r:layoutResources />
 </body>
 </html>

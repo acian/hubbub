@@ -14,4 +14,9 @@ class Post {
     static mapping = {
         sort dateCreated:"desc"
     }
+
+    static searchable = {
+        user component: true
+        spellCheck "include"
+    }
 }

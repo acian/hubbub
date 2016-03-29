@@ -47,11 +47,13 @@ grails.project.dependency.resolution = {
 
         // For the Searchable plugin's 'compass' dependency
         mavenRepo "http://repo.grails.org/grails/core"
+        mavenRepo "https://oss.sonatype.org/content/repositories/releases/"
         mavenRepo "http://repo.spring.io/milestone/"
     }
 
     dependencies {
         compile "org.apache.lucene:lucene-spellchecker:2.4.1"
+        compile "org.apache.lucene:lucene-highlighter:2.4.1"
         // specify dependencies here under either 'build', 'compile', 'runtime', 'test' or 'provided' scopes e.g.
         // runtime 'mysql:mysql-connector-java:5.1.27'
         // runtime 'org.postgresql:postgresql:9.3-1100-jdbc41'
@@ -86,7 +88,12 @@ grails.project.dependency.resolution = {
 
         runtime ":navigation:1.3.2"
 
+        //Authentication
         compile ":spring-security-core:2.0-RC2", ":spring-security-ui:1.0-RC1"
+
+        //Search
         compile ':searchable:0.6.6'
+
+        compile ':mail:1.0.1'
     }
 }
